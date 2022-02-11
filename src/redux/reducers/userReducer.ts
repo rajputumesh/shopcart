@@ -4,50 +4,28 @@ import { AuthState } from "../types";
 
 const initialStatetype: AuthState = {
   loginData: {
-    token: {
+    /* token: {
       name: "",
       abilities: [],
-      tokenable_id: "",
+      tokenable_id: 0,
       tokenable_type: "",
       updated_at: "",
       created_at: "",
-      id: null,
-    },
+      id: 0,
+    }, */
     user: {
-      id: null,
-      roleid: null,
+      id: 0,
+      roleid: 0,
       name: "",
       phone: "",
       email: "",
-      email_verified_at: "",
       created_at: "",
       updated_at: "",
     }
   },
-  signUp: {
-    token: {
-      name: "",
-      abilities: [],
-      tokenable_id: "",
-      tokenable_type: "",
-      updated_at: "",
-      created_at: "",
-      id: null,
-    },
-    user: {
-      id: null,
-      roleid: null,
-      name: "",
-      phone: "",
-      email: "",
-      email_verified_at: "",
-      created_at: "",
-      updated_at: "",
-    }
-  },
-    loggedIn: false,
-    isLoading: false,
-    errorMessage: ""
+  loggedIn: false,
+  isLoading: false,
+  errorMessage: ""
 }
 const userReducer = (state = initialStatetype, action: any ) => {
     const {type , payload} = action;
@@ -59,7 +37,6 @@ const userReducer = (state = initialStatetype, action: any ) => {
         errorMessage: '',
       };
     case USER_LOGIN_COMPLETE:
-      console.log('USER_LOGIN_COMPLETE payload = ',payload);
       return {
         ...state,
         isLoading: false,
@@ -78,23 +55,22 @@ const userReducer = (state = initialStatetype, action: any ) => {
       case ERROR_LOGIN:
       return {
         ...state,
-        errorMessage: payload,
+        errorMessage: {...payload},
         isLoading: false,
       };
     case SIGN_UP_SUCCESS:
       return {
         ...state,
-        signUp: {
-          ...state.signUp,
-          email: payload,
-          isLoading: false,
-        },
+        isLoading: false,
+        loginData: { ...payload },
+        errorMessage: '',
+        loggedIn: true,
       };
     case SIGN_UP_FAILURE:
       return {
         ...state,
         signUp: {
-          message: payload,
+          message: { ...payload },
           isLoading: false,
         },
       };

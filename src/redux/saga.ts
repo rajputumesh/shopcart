@@ -5,10 +5,8 @@ import {useNavigate} from 'react-router-dom';
  type responseType= {
     token: any;
     user: any;
-  
 }
 const signIn = async (payload: any) => {
-    //console.log('payload = ',payload);
         const response = await fetch('http://myshop.hombrehr.com/api/user/login', {
             method: "post",
             headers: new Headers({
@@ -19,20 +17,20 @@ const signIn = async (payload: any) => {
         });
         if (response.status === 200) {
             let responseBody: any = await response.json();
-            console.log('responseBody = ',responseBody);
             return responseBody;
         }
-    return await response.json();
+    let responseBody: any = await response.json();
+    return responseBody;
 };
 
 const signUp = async (payload: any) => {
     const response = await fetch('http://myshop.hombrehr.com/api/user/register', {
-          method: "post",
-          headers: new Headers({
-              "Content-Type": "application/json",
-              Accept: "application/json"
-          }),
-          body: JSON.stringify(payload)
+            method: "post",
+            headers: new Headers({
+                "Content-Type": "application/json",
+                Accept: "application/json"
+            }),
+            body: JSON.stringify(payload)
           });
           if (response.status === 200) {
           let responseBody: any = await response.json();
@@ -45,20 +43,22 @@ const signUp = async (payload: any) => {
         
 function* LoginUserfunction(data:any)
 {
-    console.log("saga 123 ", data);
     const {payload, navigate} = data;
-   // const navigate = useNavigate();
+    // const navigate = useNavigate();
     try{
         yield put({ type: USER_LOADING });
         const response: responseType = yield call<any>(signIn, payload);
-        console.log("USER data ", response);
         if (response.user) {
-            console.log("user = ", response.user);
+            yield put({
+                type:USER_LOGIN_COMPLETE,
+                payload:response,
+            });
+        navigate('/');
+      } else {
         yield put({
-            type:USER_LOGIN_COMPLETE,
+            type:ERROR_LOGIN,
             payload:response,
-        })
-         // navigate('/');
+        });
       }
     }
     catch(err){
@@ -68,19 +68,23 @@ function* LoginUserfunction(data:any)
 
 function* SignUpUserfunction(data: any)
 {
-    console.log("saga", data);
     const {payload, navigate} = data;
    // const navigate = useNavigate();
     try{
         yield put({ type: USER_LOADING });
         const response: responseType = yield call<any>(signUp, payload);
         if (response.user) {
-        yield put({
-            type:SIGN_UP_SUCCESS,
-            payload:response,
-        }) 
+            yield put({
+                type:SIGN_UP_SUCCESS,
+                payload:response,
+            }) 
           navigate('/');
-      }
+        }else{
+            yield put({
+                type:SIGN_UP_FAILURE,
+                payload:response,
+            });
+        }
     }
     catch(err){
         console.log('error', err);

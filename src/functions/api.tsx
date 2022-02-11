@@ -1,19 +1,20 @@
 //========================= get all=============
+const APIURL = "http://myshop.hombrehr.com/api/";
 
 export const gatproducts = async () => {
-    const response = await fetch('http://myshop.hombrehr.com/api/product/latest');
+    const response = await fetch(APIURL+'product/latest');
     const productlist =await response.json();
     return productlist.data;
 };
 
 export const getbrands = async () => {
-    const res = await fetch('http://myshop.hombrehr.com/api/brands/latest');
+    const res = await fetch(APIURL+'brands/latest');
     const brandlist =await res.json();
     return brandlist;
 };
 
 export const getcategory = async () => {
-    const response = await fetch('http://myshop.hombrehr.com/api/category/latest');
+    const response = await fetch(APIURL+'category/latest');
     const category:any =await response.json();
     return category;
 }; 
@@ -21,20 +22,20 @@ export const getcategory = async () => {
 //============================ get by id ==========================
 
 export const categoryproduct = async (id:any) => {
-    const response = await fetch('http://myshop.hombrehr.com/api/category/details/'+id);
+    const response = await fetch(APIURL+'category/details/'+id);
     const products:any =await response.json();
     console.log('api product = '+products);
     return products;
 }; 
 
 export const brandproduct = async (id:any) => {
-    const response = await fetch('http://myshop.hombrehr.com/api/brand/details/'+id);
+    const response = await fetch(APIURL+'brand/details/'+id);
     const products:any =await response.json();
     return products;
 };
 
 export const productdetail = async (proid:any) => {
-    const response = await fetch('http://myshop.hombrehr.com/api/product/'+proid);
+    const response = await fetch(APIURL+'product/'+proid);
     const product:any =await response.json();
     return product;
 };
