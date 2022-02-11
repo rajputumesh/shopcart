@@ -1,6 +1,7 @@
 import React, {FC ,useState, useContext, useEffect} from "react";
 import { NavLink } from "react-router-dom";
 import Product from "../Compoment/Product";
+import { CategoryType, BrandType ,ProductType} from "../redux/types";
 import {getcategory, gatproducts, getbrands} from '../functions/api';
 
 const Home:FC = () => {
@@ -14,17 +15,17 @@ const Home:FC = () => {
     }, []);
 
     const allfunction = async () =>{
+        const categorylist:any = await getcategory();
+        setcategory(categorylist);
+        
         const productlist:any = await gatproducts();
         setproduct(productlist);
         
         const brandlist:any = await getbrands();
         setbrand(brandlist);
+}
 
-        const categorylist:any = await getcategory();
-        setcategory(categorylist);
-    }
-
-    const category = categories.map((data:{id: number; name: string, image:string})=>{
+    const category = categories.map((data:CategoryType)=>{
         const {id, name, image} = data;
         const imgpath = "http://myshop.hombrehr.com/storage/categories";
         return(
@@ -39,17 +40,17 @@ const Home:FC = () => {
     //console.log('products '+products);
     //console.log('brands '+brands);
     
-    const product = products.map((data:{id: number; name: string, slug:string, image:string, price:number, saleprice:number})=>{
+    const product = products.map((data:ProductType)=>{
         return(
-            <Product key={data.id} 
-            name={data.name} 
-            slug={data.slug} 
-            image={data.image} 
-            price={data.price} 
-            saleprice={data.saleprice} id={data.id} />
+            <Product key={data.id}
+            name={data.name}
+            slug={data.slug}
+            image={data.image}
+            price={data.price}
+            saleprice={data.saleprice} id={data.id} short_description={""} description={""} brand={[]} category={[]} />
         )
     });
-    const brand = brands.map((data:{id: number; name: string, image:string})=>{
+    const brand = brands.map((data:BrandType)=>{
         const {id, name, image} = data;
         const imgpath = "http://myshop.hombrehr.com/storage/brands";
         return (

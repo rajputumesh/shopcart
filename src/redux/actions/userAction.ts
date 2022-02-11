@@ -1,5 +1,5 @@
-export const USER_LOGIN = 'user/USER-LOGIN';
-export const USER_LOGIN_COMPLETE = 'user/USER-LOGIN-COMPLETE';
+export const USER_LOGIN = 'user/USER_LOGIN';
+export const USER_LOGIN_COMPLETE = 'user/USER_LOGIN_COMPLETE';
 export const SIGN_UP = 'user/SIGN_UP';
 export const SIGN_UP_SUCCESS = 'user/SIGN_UP_SUCCESS';
 export const SIGN_UP_FAILURE = 'user/SIGN_UP_FAILURE';

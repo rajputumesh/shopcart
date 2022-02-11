@@ -2,6 +2,7 @@ import React, { FC, useState, useContext, useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import Product from "../Compoment/Product";
 import {categoryproduct, gatproducts, getcategory} from '../functions/api';
+import { CategoryType, ProductType } from "../redux/types";
 
 
 const Shop:FC = () => {
@@ -39,18 +40,18 @@ const Shop:FC = () => {
         setcategory(categorylist);
     }
     
-    const product = products.map((data:{id: number; name: string, slug:string, image:string, price:number, saleprice:number})=>{
+    const product = products.map((data:ProductType)=>{
         return(
-            <Product key={data.id} 
-            name={data.name} 
-            slug={data.slug} 
-            image={data.image} 
-            price={data.price} 
-            saleprice={data.saleprice} id={data.id} />
+            <Product key={data.id}
+            name={data.name}
+            slug={data.slug}
+            image={data.image}
+            price={data.price}
+            saleprice={data.saleprice} id={data.id} short_description={""} description={""} brand={[]} category={[]} />
         )
     });
 
-    const category = categories.map((data:{id: number; name: string, image:string})=>{
+    const category = categories.map((data:CategoryType)=>{
         const {id, name, image} = data;
         const imgpath = "http://myshop.hombrehr.com/storage/categories";
         return(

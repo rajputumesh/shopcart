@@ -1,16 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { ProductType } from "../redux/types";
 
-interface IProps {
-    id:number;
-    name:string;
-    saleprice:number;
-    price:number;
-    slug:string;
-    image:string;
-  }
-
-const Product = (props: IProps) => {
+const Product = (props: ProductType) => {
     const {id, name, price, saleprice, slug, image} = props;
     const imgpath = "http://myshop.hombrehr.com/storage/products";
 

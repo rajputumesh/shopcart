@@ -7,6 +7,7 @@ const Detail = () => {
     const initialTutorialState = {
         id: null,
         name: "",
+        slug:"",
         image: "",
         price: "",
         saleprice: "",

@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import {loginUser} from "../redux/actions/userAction";
 // import {rootState} from "../redux/types";
 import {useNavigate} from 'react-router-dom';
+import { rootState } from "../redux/types";
 const StateInterface = {
     email: '',
     password: '',
@@ -41,6 +42,10 @@ const Login:FC = () => {
         e.preventDefault();
         dispatch(loginUser(form, navigate));
     }
+
+    const useruser:any = useSelector<rootState>((state) => state.user);
+    const errorMessage = useruser.errorMessage;
+    
     return (
         <div className="my-5">
             <div className="container">
@@ -49,6 +54,9 @@ const Login:FC = () => {
                         <div className="card">
                             <div className="card-header"><i className="fa fa-user"></i> Login Now</div>
                             <div className="card-body">
+                            { errorMessage.errors ? 
+                                <p className="alert alert-danger"> {errorMessage.errors} </p> : '' 
+                            }
                                 <div className="form-group">
                                     <label className="mt-3" htmlFor="">Email</label>
                                     <input className="form-control" type="email" name="email" id="email" placeholder="Email id" onChange={changeHandler}/>
