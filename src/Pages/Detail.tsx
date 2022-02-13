@@ -63,7 +63,7 @@ const Detail = () => {
                             <div className="">
                                 <div className="input-group mb-3 mx-3" style={{width:'150px'}}>
                                     <span className="input-group-text bg-warning" onClick={()=>changeQuantity('minus',quantity)}>-</span>
-                                    <input type="number" className="form-control text-center" value={quantity} />
+                                    <input type="text" className="form-control text-center" value={quantity} />
                                     <span className="input-group-text bg-warning" onClick={()=>changeQuantity('plus',quantity)}>+</span>
                                 </div>
                             </div>

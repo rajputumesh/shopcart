@@ -1,18 +1,18 @@
 import React, { FC, useState, useContext, useEffect} from "react";
 import { Container, Nav } from "react-bootstrap";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {getcategory} from '../functions/api';
 import { useSelector, useDispatch } from "react-redux";
-import { rootState, AuthState, loginDateState } from "../redux/types";
-import { CategoryType } from "../redux/types";
+import { rootState, CategoryType } from "../redux/types";
+import { handleSignOut } from "../redux/actions/userAction";
 const Header: FC = () => {
  
-    const useruser:any = useSelector<rootState>((state) => state.user);
-    const loggedIn = useruser.loggedIn;
-    //console.log('user logindata = ',useruser);
+    const auth:any = useSelector<rootState>((state) => state.user);
+    const loggedIn = auth.loggedIn;
+    //console.log('user logindata = ',auth);
 
     const dispatch = useDispatch();
-    
+    const navigate = useNavigate();
     const [categories , setcategory] = useState([]);
     useEffect( () => {
         allfunction();
@@ -33,6 +33,11 @@ const Header: FC = () => {
             </li>
         )
     });
+
+    const logoutUser = () => {
+        dispatch(handleSignOut());
+        localStorage.removeItem("user");
+    };
 
   return (
     <>
@@ -67,8 +72,13 @@ const Header: FC = () => {
                                         <NavLink className="nav-link" to="/cart">Cart</NavLink>
                                     </li>
                                     <li className="nav-item">
-                                        <NavLink className="nav-link" to="/register" > {useruser.loginData.user.name} </NavLink>
+                                        <NavLink className="nav-link" to="/profile" > {auth.loginData.user.name} </NavLink>
                                     </li>
+
+                                    <li className="nav-item">
+                                        <p className="nav-link btn btn-link" onClick={logoutUser}> Logout </p>
+                                    </li>
+
                                 </ul>
                             )}
                     </div>
