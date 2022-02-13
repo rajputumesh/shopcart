@@ -1,7 +1,5 @@
 import {loginUser, USER_LOGIN, SIGN_UP, ERROR_LOGIN, SIGN_UP_SUCCESS, SIGN_UP_FAILURE, loginComplete, signUpSuccess, signUpFailure, handleSignOut,USER_LOADING, USER_LOGIN_COMPLETE} from './actions/userAction';
 import { put, call, takeEvery,all, fork } from 'redux-saga/effects';
-//import { get } from 'lodash';
-import {useNavigate} from 'react-router-dom';
  type responseType= {
     token: any;
     user: any;
@@ -44,7 +42,6 @@ const signUp = async (payload: any) => {
 function* LoginUserfunction(data:any)
 {
     const {payload, navigate} = data;
-    // const navigate = useNavigate();
     try{
         yield put({ type: USER_LOADING });
         const response: responseType = yield call<any>(signIn, payload);
@@ -69,7 +66,6 @@ function* LoginUserfunction(data:any)
 function* SignUpUserfunction(data: any)
 {
     const {payload, navigate} = data;
-   // const navigate = useNavigate();
     try{
         yield put({ type: USER_LOADING });
         const response: responseType = yield call<any>(signUp, payload);
@@ -78,6 +74,7 @@ function* SignUpUserfunction(data: any)
                 type:SIGN_UP_SUCCESS,
                 payload:response,
             }) 
+            
           navigate('/');
         }else{
             yield put({

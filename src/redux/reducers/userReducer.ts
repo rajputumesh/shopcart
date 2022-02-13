@@ -1,5 +1,5 @@
 //import { DefaultRootState } from "react-redux";
-import { USER_LOGIN, USER_LOGIN_COMPLETE,SIGN_UP, ERROR_LOGIN, SIGN_UP_SUCCESS, SIGN_UP_FAILURE, USER_LOADING } from "../actions/userAction";
+import { USER_LOGIN, USER_LOGIN_COMPLETE,SIGN_UP, ERROR_LOGIN, SIGN_UP_SUCCESS, SIGN_UP_FAILURE, USER_LOADING, SIGN_OUT } from "../actions/userAction";
 import { AuthState } from "../types";
 
 const initialStatetype: AuthState = {
@@ -70,11 +70,17 @@ const userReducer = (state = initialStatetype, action: any ) => {
       return {
         ...state,
         signUp: {
-          message: { ...payload },
+          errorMessage: {payload},
           isLoading: false,
         },
       };
       
+    case SIGN_OUT:
+      return {
+        ...state,
+        loggedIn: false,
+        user: null,
+      };
     default:
         return state;
 

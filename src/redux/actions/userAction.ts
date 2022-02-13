@@ -8,16 +8,14 @@ export const USER_LOADING = 'USER_LOADING';
 export const ERROR_LOGIN = 'user/ERROR_LOGIN';
 
 export const loginUser = (payload: any, navigate: any) => {
-  console.log('loginUser');
-    return {
-      type: USER_LOGIN,
-      payload,
-      navigate,
-    };
+  return {
+    type: USER_LOGIN,
+    payload,
+    navigate,
+  };
 };
 
 export const loginComplete = (payload: any) => {
-  console.log('logincomplete');
     return {
       type: USER_LOGIN_COMPLETE,
       payload,
@@ -50,4 +48,5 @@ export const signUpSuccess = () => {
       type: SIGN_OUT,
     };
   };
+  
 

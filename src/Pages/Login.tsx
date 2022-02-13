@@ -10,34 +10,13 @@ const StateInterface = {
     password: '',
 }
 const Login:FC = () => {
-    
-        const dispatch = useDispatch();
-        const navigate = useNavigate();
-        const [form, setForm] = useState(StateInterface)
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const [form, setForm] = useState(StateInterface)
 
     const changeHandler = (event: any) => {
         setForm({ ...form, [event.target.name]: event.target.value });
     }
-      
-    // const  submitForm = async () =>{
-    //     try {
-    //         const response = await fetch('http://myshop.hombrehr.com/api/user/login', {
-    //             method: "post",
-    //             headers: new Headers({
-    //                 "Content-Type": "application/json",
-    //                 Accept: "application/json"
-    //             }),
-    //             body: JSON.stringify(form)
-    //         });
-    //         if (response.status === 200) {
-    //             let responseBody: any = await response.json();
-    //             console.log(responseBody);
-    //         }
-    //         console.log('hiii');
-    //     } catch (ex) {
-    //         console.log(ex);
-    //     }
-    // }
     const submitForm = (e: any) => {
         e.preventDefault();
         dispatch(loginUser(form, navigate));
@@ -54,20 +33,22 @@ const Login:FC = () => {
                         <div className="card">
                             <div className="card-header"><i className="fa fa-user"></i> Login Now</div>
                             <div className="card-body">
-                            { errorMessage.errors ? 
-                                <p className="alert alert-danger"> {errorMessage.errors} </p> : '' 
-                            }
-                                <div className="form-group">
-                                    <label className="mt-3" htmlFor="">Email</label>
-                                    <input className="form-control" type="email" name="email" id="email" placeholder="Email id" onChange={changeHandler}/>
-                                </div>
-                                <div className="form-group">
-                                    <label className="mt-3" htmlFor="">Password</label>
-                                    <input className="form-control" type="text" name="password" id="password" placeholder="Password" onChange={changeHandler}/>
-                                </div>
-                                <div className="form-group my-3">
-                                    <button className="btn btn-primary px-5" onClick={submitForm}>Login</button>
-                                </div>
+                                <form action="" method="post">
+                                    { errorMessage.errors ? 
+                                        <p className="alert alert-danger"> {errorMessage.errors} </p> : '' 
+                                    }
+                                    <div className="form-group">
+                                        <label className="mt-3" htmlFor="">Email</label>
+                                        <input className="form-control" type="email" name="email" id="email" placeholder="Email id" onChange={changeHandler}/>
+                                    </div>
+                                    <div className="form-group">
+                                        <label className="mt-3" htmlFor="">Password</label>
+                                        <input className="form-control" type="text" name="password" id="password" placeholder="Password" onChange={changeHandler}/>
+                                    </div>
+                                    <div className="form-group my-3">
+                                        <button className="btn btn-primary px-5" onClick={submitForm}>Login</button>
+                                    </div>
+                                </form>
                             </div>
                             <div className="card-footer">
                                 <div className="d-flex justify-content-between">
@@ -85,7 +66,4 @@ const Login:FC = () => {
 }
 
 export default Login;
-function emptyState(): any {
-    throw new Error("Function not implemented.");
-}
 
