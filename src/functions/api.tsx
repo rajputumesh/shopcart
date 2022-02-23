@@ -1,6 +1,8 @@
 //========================= get all=============
 const APIURL = "http://merishop.zaibainfotech.com/api/";
 
+//=============================================================
+
 export const gatproducts = async () => {
     const response = await fetch(APIURL+'product/latest');
     const productlist =await response.json();
