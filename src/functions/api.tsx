@@ -1,5 +1,5 @@
 //========================= get all=============
-const APIURL = "http://myshop.hombrehr.com/api/";
+const APIURL = "http://merishop.zaibainfotech.com/api/";
 
 export const gatproducts = async () => {
     const response = await fetch(APIURL+'product/latest');
